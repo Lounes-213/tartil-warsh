@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
-const basePath = process.env.BASE_PATH || "";
+let basePath = process.env.BASE_PATH || "";
+if (basePath) {
+  // Normalize if path conversion mangled it on Windows/MSYS
+  if (!basePath.startsWith("/")) {
+    basePath = "/" + (basePath.split(/[/\\]/).pop() || "");
+  }
+  basePath = basePath.replace(/\/+$/, "");
+}
 
 const nextConfig: NextConfig = {
   output: "export",
