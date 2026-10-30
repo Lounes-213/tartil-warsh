@@ -1,0 +1,25 @@
+{
+  "name": "مصحف ورش — رواية ورش عن نافع",
+  "short_name": "مصحف ورش",
+  "description": "المصحف الشريف برواية ورش عن نافع: نص مصحفي بخط مجمع الملك فهد، تلاوات ورش، وتتبّع للآيات.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f1e5",
+  "theme_color": "#0f1512",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "الفاتحة", "url": "/surah/1/" },
+    { "name": "البقرة", "url": "/surah/2/" },
+    { "name": "يس", "url": "/surah/36/" }
+  ]
+}

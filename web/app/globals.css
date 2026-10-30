@@ -1,0 +1,350 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "KFGQPC Warsh";
+  src: url("./fonts/KFGQPC-Warsh.woff2") format("woff2"),
+       url("/fonts/KFGQPC-Warsh.woff2") format("woff2"),
+       url("/tartil-warsh/fonts/KFGQPC-Warsh.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiri";
+  src: url("./fonts/Amiri-Regular.woff2") format("woff2"),
+       url("/fonts/Amiri-Regular.woff2") format("woff2"),
+       url("/tartil-warsh/fonts/Amiri-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiri";
+  src: url("./fonts/Amiri-Bold.woff2") format("woff2"),
+       url("/fonts/Amiri-Bold.woff2") format("woff2"),
+       url("/tartil-warsh/fonts/Amiri-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Themes ---------- */
+:root,
+[data-theme="light"] {
+  --bg: #f6f1e5;
+  --bg-soft: #efe8d7;
+  --surface: #fffdf6;
+  --surface-2: #faf5e8;
+  --ink: #1f1b14;
+  --muted: #6d6455;
+  --line: #e0d5be;
+  --accent: #17614f;
+  --accent-soft: #dcefe8;
+  --gold: #a17b2c;
+  --gold-soft: #f0e4c4;
+  --shadow: 0 18px 50px -22px rgb(60 45 20 / 0.35);
+  color-scheme: light;
+}
+
+[data-theme="sepia"] {
+  --bg: #ead9b8;
+  --bg-soft: #e2cda6;
+  --surface: #f6e9cc;
+  --surface-2: #efdfbd;
+  --ink: #382a16;
+  --muted: #77613f;
+  --line: #d6c09a;
+  --accent: #7a4a1c;
+  --accent-soft: #ecd6b8;
+  --gold: #8a6320;
+  --gold-soft: #e8d3a8;
+  --shadow: 0 18px 50px -22px rgb(80 55 20 / 0.4);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0a0f0d;
+  --bg-soft: #0f1512;
+  --surface: #131a17;
+  --surface-2: #18211d;
+  --ink: #ece7da;
+  --muted: #97917f;
+  --line: #24312c;
+  --accent: #5ac7a9;
+  --accent-soft: #14342b;
+  --gold: #d9b969;
+  --gold-soft: #2b2415;
+  --shadow: 0 22px 60px -24px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+
+  --font-arabic: "Amiri", "Segoe UI", Tahoma, serif;
+  --font-mushaf: "KFGQPC Warsh", "Amiri", serif;
+  --font-ui: ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ---------- Base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(1200px 600px at 100% -10%, color-mix(in oklab, var(--gold) 10%, transparent), transparent 70%),
+    radial-gradient(900px 500px at 0% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 65%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--gold) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* thin, themed scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--muted) 40%, transparent) transparent;
+}
+
+/* ---------- Mushaf ---------- */
+.mushaf {
+  font-family: var(--font-mushaf);
+  font-size: var(--mushaf-size, 30px);
+  line-height: 2.35;
+  letter-spacing: 0;
+  text-align: center;
+  word-spacing: 0.04em;
+  font-feature-settings: "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mushaf .ayah {
+  transition: background-color 220ms ease, box-shadow 220ms ease;
+  border-radius: 14px;
+  padding: 0.06em 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.mushaf .ayah:hover {
+  background: color-mix(in oklab, var(--gold) 9%, transparent);
+}
+
+.mushaf .ayah.is-current {
+  background: color-mix(in oklab, var(--gold) 12%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 22%, transparent);
+}
+
+/* Word-level Highlighting & States */
+.mushaf-word {
+  display: inline-block;
+  padding: 0 0.12em;
+  margin: 0 0.04em;
+  border-radius: 0.28em;
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mushaf-word:hover {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+}
+
+.mushaf-word.is-word-active {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 4px 14px -2px color-mix(in oklab, var(--accent) 60%, transparent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Memorization / Tasmee' Mode */
+.mushaf-word.is-hidden {
+  filter: blur(8px);
+  user-select: none;
+  opacity: 0.35;
+  transition: filter 300ms ease, opacity 300ms ease;
+}
+
+.mushaf-word.is-hidden:hover {
+  opacity: 0.6;
+}
+
+.mushaf-word.is-revealed {
+  filter: none;
+  opacity: 1;
+  animation: reveal-pop 400ms cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+@keyframes reveal-pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.08); background: color-mix(in oklab, var(--gold) 35%, transparent); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Voice Corrector Statuses */
+.mushaf-word.is-correct {
+  background: color-mix(in oklab, #10b981 25%, transparent) !important;
+  color: #065f46;
+  border-bottom: 2px solid #10b981;
+}
+
+[data-theme="dark"] .mushaf-word.is-correct {
+  color: #6ee7b7;
+}
+
+.mushaf-word.is-mistake {
+  background: color-mix(in oklab, #ef4444 25%, transparent) !important;
+  color: #991b1b;
+  border-bottom: 2px dashed #ef4444;
+  animation: pulse-mistake 1.2s infinite ease-in-out;
+}
+
+[data-theme="dark"] .mushaf-word.is-mistake {
+  color: #fca5a5;
+}
+
+@keyframes pulse-mistake {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* Voice listening wave indicator */
+.pulse-mic {
+  position: relative;
+}
+.pulse-mic::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 2px solid #ef4444;
+  animation: mic-wave 1.5s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes mic-wave {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.ayah-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.65em;
+  height: 1.65em;
+  margin: 0 0.22em;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  color: var(--gold);
+  font-family: var(--font-mushaf);
+  font-size: 0.5em;
+  line-height: 1;
+  vertical-align: 0.28em;
+  background: color-mix(in oklab, var(--gold) 8%, transparent);
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.ayah-num:hover {
+  transform: scale(1.08);
+  background: color-mix(in oklab, var(--gold) 18%, transparent);
+}
+
+.ayah-num.is-current {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+}
+
+/* ---------- Ornaments ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--gold);
+  opacity: 0.85;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+
+.ornament-frame {
+  background:
+    radial-gradient(120% 120% at 50% 0%, color-mix(in oklab, var(--gold) 8%, transparent), transparent 60%),
+    var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Motion ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-in {
+  animation: fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-in {
+    animation: none;
+  }
+  .mushaf .ayah,
+  .ayah-num {
+    transition: none;
+  }
+}
+
+/* ---------- Utility ---------- */
+.glass {
+  background: color-mix(in oklab, var(--surface) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid color-mix(in oklab, var(--line) 85%, transparent);
+}
+
+.latin {
+  font-family: var(--font-ui);
+  direction: ltr;
+  unicode-bidi: isolate;
+}

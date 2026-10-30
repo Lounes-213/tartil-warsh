@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+web/node_modules/
+.pnp/
+.pnp.*
+
+# Next.js & Build outputs
+web/.next/
+web/out/
+.next/
+out/
+build/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Environment & credentials
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary test audio
+test_*.mp3
+t_*.mp3
